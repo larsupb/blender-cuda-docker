@@ -24,5 +24,11 @@ RUN rm blender.tar.xz
 
 VOLUME /media
 
+RUN ln -s /usr/local/blender/2.83/python/bin/python3.7m /usr/local/blender/2.83/python/bin/python
+ENV PATH="/usr/local/blender/2.83/python/bin:{$PATH}"
+
+RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
+RUN python -m pip install pandas geopandas overpy pyproj matplotlib
+
 
 ENTRYPOINT ["/usr/local/blender/blender", "-b"]
